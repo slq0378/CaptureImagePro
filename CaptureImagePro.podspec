@@ -8,7 +8,7 @@ s.summary      = '通过AVFoundation自定义相机，可有效降低内存占�
 
 s.platform     =  :ios, '7.0'
 s.source       =  {:git => 'https://github.com/slq0378/CaptureImagePro.git', :tag => s.version}
-s.source_files = 'CaptureImagePro'
+s.source_files = 'CaptureImagePro/SLQCameraViewController'
 s.frameworks   =  'AVFoundation'
 s.requires_arc = true
 
