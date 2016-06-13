@@ -4,7 +4,8 @@
 ## 使用很简单
 
 - 效果
-![]()
+
+![](CaptureImagePro/captureImage.gif)
 
 - 包含头文件
 `#import "SLQCameraViewController/SLQCameraViewController.h"`

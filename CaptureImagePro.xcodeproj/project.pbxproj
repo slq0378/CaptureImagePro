@@ -16,6 +16,7 @@
 		E41FB5211D0D611B00BC3F1C /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E41FB51F1D0D611B00BC3F1C /* LaunchScreen.storyboard */; };
 		E41FB52D1D0D613F00BC3F1C /* SLQCameraHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = E41FB52A1D0D613F00BC3F1C /* SLQCameraHelper.m */; };
 		E41FB52E1D0D613F00BC3F1C /* SLQCameraViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E41FB52C1D0D613F00BC3F1C /* SLQCameraViewController.m */; };
+		E41FB5301D0E511100BC3F1C /* captureImage.gif in Resources */ = {isa = PBXBuildFile; fileRef = E41FB52F1D0E511100BC3F1C /* captureImage.gif */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -34,6 +35,7 @@
 		E41FB52A1D0D613F00BC3F1C /* SLQCameraHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SLQCameraHelper.m; sourceTree = "<group>"; };
 		E41FB52B1D0D613F00BC3F1C /* SLQCameraViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SLQCameraViewController.h; sourceTree = "<group>"; };
 		E41FB52C1D0D613F00BC3F1C /* SLQCameraViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SLQCameraViewController.m; sourceTree = "<group>"; };
+		E41FB52F1D0E511100BC3F1C /* captureImage.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = captureImage.gif; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -84,6 +86,7 @@
 		E41FB50E1D0D611B00BC3F1C /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				E41FB52F1D0E511100BC3F1C /* captureImage.gif */,
 				E41FB50F1D0D611B00BC3F1C /* main.m */,
 			);
 			name = "Supporting Files";
@@ -160,6 +163,7 @@
 				E41FB5211D0D611B00BC3F1C /* LaunchScreen.storyboard in Resources */,
 				E41FB51E1D0D611B00BC3F1C /* Assets.xcassets in Resources */,
 				E41FB5191D0D611B00BC3F1C /* Main.storyboard in Resources */,
+				E41FB5301D0E511100BC3F1C /* captureImage.gif in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -324,6 +328,7 @@
 				E41FB5271D0D611B00BC3F1C /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 
