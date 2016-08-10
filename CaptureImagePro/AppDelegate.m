@@ -7,6 +7,7 @@
 //
 
 #import "AppDelegate.h"
+#import <AVFoundation/AVFoundation.h>
 
 @interface AppDelegate ()
 
@@ -17,6 +18,18 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     // Override point for customization after application launch.
+    // 配置音频会话的最佳位置
+    // 1、获取音频会话单粒实例
+    AVAudioSession *session = [AVAudioSession sharedInstance];
+    NSError *error;
+    // 2、设置音频分类
+    if (![session setCategory:AVAudioSessionCategoryPlayAndRecord error:&error]) {
+        NSLog(@"Category Error :%@",[error localizedDescription]);
+    }
+    // 3、激活音频会话
+    if (![session setActive:YES error:&error]) {
+        NSLog(@"Activation Error :%@",[error localizedDescription]);
+    }
     return YES;
 }
 

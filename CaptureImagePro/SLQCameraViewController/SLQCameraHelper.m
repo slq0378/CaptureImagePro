@@ -27,14 +27,14 @@ static SLQCameraHelper *sharedInstance = nil;
 //    2.创建、配置输入设备
     AVCaptureDevice *device = [AVCaptureDevice defaultDeviceWithMediaType:AVMediaTypeVideo];
 	NSError *error;
-	AVCaptureDeviceInput *captureInput = [AVCaptureDeviceInput deviceInputWithDevice:device error:&error];
-	if (!captureInput)
+    AVCaptureDeviceInput *captureInput = [AVCaptureDeviceInput deviceInputWithDevice:device error:&error];
+    if (captureInput)
     {
         if([self.capSession canAddInput:captureInput]) {
+            
+            [self.capSession addInput:captureInput];
+        }
         
-        [self.capSession addInput:captureInput];
-    }
-		
     }else {
         NSLog(@"Error: %@", error);
     }

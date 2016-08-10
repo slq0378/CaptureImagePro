@@ -79,7 +79,6 @@
     UIButton *biggerBtn = [UIButton buttonWithType:UIButtonTypeRoundedRect];
     biggerBtn.frame = CGRectMake(ScreenWidth - 100, ScreenHeight/2 - 150, 100, 60);
     [biggerBtn setTitle:@"放大" forState:UIControlStateNormal];
-    //    [biggerBtn addTarget:self action:@selector(biggerCamera:) forControlEvents:UIControlEventTouchUpInside];
     [self.view addSubview:biggerBtn];
     _biggerBtn = biggerBtn;
     
@@ -94,7 +93,7 @@
     UIButton *smallerBtn = [UIButton buttonWithType:UIButtonTypeRoundedRect];
     smallerBtn.frame = CGRectMake(ScreenWidth - 100,  ScreenHeight/2 + 150, 100, 60);
     [smallerBtn setTitle:@"缩小" forState:UIControlStateNormal];
-    //    [smallerBtn addTarget:self action:@selector(smallerCamera:) forControlEvents:UIControlEventTouchUpInside];
+
     [self.view addSubview:smallerBtn];
     _smallerBtn = smallerBtn;
     
@@ -148,10 +147,8 @@
     }
     //预览窗口
     [SLQCameraHelper embedPreviewInView:_previewView];
-
+ 
 }
-
-
 
 // 重拍照片
 - (void)backToCamera
