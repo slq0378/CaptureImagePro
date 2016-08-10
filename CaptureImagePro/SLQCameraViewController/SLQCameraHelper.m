@@ -24,16 +24,22 @@ static SLQCameraHelper *sharedInstance = nil;
     [self.capSession setSessionPreset:AVCaptureSessionPresetHigh];
     
     
-    //2.创建、配置输入设备
-//    AVCaptureDevice *device = [AVCaptureDevice defaultDeviceWithMediaType:AVMediaTypeVideo];
-//	NSError *error;
-//	AVCaptureDeviceInput *captureInput = [AVCaptureDeviceInput deviceInputWithDevice:device error:&error];
-//	if (!captureInput)
-//	{
-//		NSLog(@"Error: %@", error);
-//		return;
-//	}
-//    [self.session addInput:captureInput];
+//    2.创建、配置输入设备
+    AVCaptureDevice *device = [AVCaptureDevice defaultDeviceWithMediaType:AVMediaTypeVideo];
+	NSError *error;
+	AVCaptureDeviceInput *captureInput = [AVCaptureDeviceInput deviceInputWithDevice:device error:&error];
+	if (!captureInput)
+    {
+        if([self.capSession canAddInput:captureInput]) {
+        
+        [self.capSession addInput:captureInput];
+    }
+		
+    }else {
+        NSLog(@"Error: %@", error);
+    }
+    _device = device;
+   
     
     AVCaptureDeviceInput *newVideoInput = [[AVCaptureDeviceInput alloc] initWithDevice:[self backFacingCamera] error:nil];
     if ([self.capSession canAddInput:newVideoInput]) {
@@ -127,6 +133,46 @@ static SLQCameraHelper *sharedInstance = nil;
          }
      }];
 }
+
+
+- (void)zoomCarema:(CGFloat)value {
+    if([self canZoom]) {
+        
+        if(!self.device.isRampingVideoZoom) {
+            NSError *error;
+            if ([self.device lockForConfiguration:&error]) {
+                // 线性转换
+                CGFloat zoomFactor = pow([self getMAXZoomValue], value);
+                self.device.videoZoomFactor = zoomFactor;
+                [self.device unlockForConfiguration];
+            }else {
+                NSLog(@"缩放失败：%@",[error localizedDescription]);
+            }
+        }
+    }
+}
+
+/// 是否支持缩放
+- (BOOL)canZoom {
+    return self.device.activeFormat.videoMaxZoomFactor > 1.0f;
+}
+/// 缩放最大值
+- (CGFloat)getMAXZoomValue {
+    return MIN(self.device.activeFormat.videoMaxZoomFactor, 4.0f);
+}
+
+- (void)cancelZoomRamp  {
+    
+    NSError *error;
+    if ([self.device lockForConfiguration:&error]) {
+        [self.device cancelVideoZoomRamp];
+        [self.device unlockForConfiguration];
+    }else {
+        NSLog(@"设置缩放状态失败：%@",[error localizedDescription]);
+    }
+}
+
+
 
 - (AVCaptureDevice *) cameraWithPosition:(AVCaptureDevicePosition) position
 {
@@ -299,6 +345,16 @@ bail:
 	self.image = nil;
 }
 #pragma mark Class Interface
+
+
++ (void)zoomCarema:(CGFloat)value {
+     [[self sharedInstance] zoomCarema:value];
+}
+
+
++ (void)cancelZoomRamp {
+    [[self sharedInstance] cancelZoomRamp];
+}
 
 + (id) sharedInstance // private
 {

@@ -17,6 +17,8 @@ typedef void (^CaptureImageBlock)(UIImage *);
 <AVCaptureVideoDataOutputSampleBufferDelegate>
 
 @property (nonatomic,strong) AVCaptureSession *capSession;
+/**<#注释#>*/
+@property (nonatomic, strong) AVCaptureDevice *device;
 @property (nonatomic,strong) AVCaptureStillImageOutput *captureOutput;
 @property (nonatomic,strong) AVCaptureDeviceInput *videoInput;
 @property (nonatomic,strong) UIImage *image;
@@ -60,6 +62,19 @@ typedef void (^CaptureImageBlock)(UIImage *);
  *	@param	block	block参数
  */
 + (void)captureStillImageWithBlock:(CaptureImageBlock)block;
+
+/**
+ *  设置缩放值
+ *
+ *  @param value value description
+ */
++ (void)zoomCarema:(CGFloat)value;
+/**
+ *  停止缩放
+ *
+ *  @param value <#value description#>
+ */
++ (void)cancelZoomRamp;
 /**
  *	翻转相机前/后摄像头
  *

@@ -33,7 +33,12 @@
 @property (nonatomic, strong) UIButton *useBtn;
 /**重拍*/
 @property (nonatomic, strong) UIButton *againBtn;
-
+/**缩小按钮*/
+@property (nonatomic, strong) UIButton *smallerBtn;
+/**放大按钮*/
+@property (nonatomic, strong) UIButton *biggerBtn;
+/**缩放条*/
+@property (nonatomic, strong) UISlider *slider;
 /**captureImage*/
 @property (nonatomic, strong) UIImage *captureImage;
 /// 对焦手势
@@ -69,6 +74,29 @@
     [toggleCameraBtn addTarget:self action:@selector(toggleCamera:) forControlEvents:UIControlEventTouchUpInside];
     [self.view addSubview:toggleCameraBtn];
     _toggleCameraBtn = toggleCameraBtn;
+    
+    
+    UIButton *biggerBtn = [UIButton buttonWithType:UIButtonTypeRoundedRect];
+    biggerBtn.frame = CGRectMake(ScreenWidth - 100, ScreenHeight/2 - 150, 100, 60);
+    [biggerBtn setTitle:@"放大" forState:UIControlStateNormal];
+    //    [biggerBtn addTarget:self action:@selector(biggerCamera:) forControlEvents:UIControlEventTouchUpInside];
+    [self.view addSubview:biggerBtn];
+    _biggerBtn = biggerBtn;
+    
+    UISlider *slider = [[UISlider alloc] initWithFrame:CGRectMake(ScreenWidth - 150, ScreenHeight/2 - 50, 200, 150)];
+    slider.transform = CGAffineTransformMakeRotation(-M_PI_2);
+    [self.view addSubview:slider];
+    [slider addTarget:self action:@selector(sliderValueChanged:) forControlEvents:UIControlEventValueChanged];
+    
+    [slider addTarget:self action:@selector(sliderValueEnd:) forControlEvents:UIControlEventTouchDragExit | UIControlEventTouchDragOutside | UIControlEventTouchCancel] ;
+    _slider = slider;
+    
+    UIButton *smallerBtn = [UIButton buttonWithType:UIButtonTypeRoundedRect];
+    smallerBtn.frame = CGRectMake(ScreenWidth - 100,  ScreenHeight/2 + 150, 100, 60);
+    [smallerBtn setTitle:@"缩小" forState:UIControlStateNormal];
+    //    [smallerBtn addTarget:self action:@selector(smallerCamera:) forControlEvents:UIControlEventTouchUpInside];
+    [self.view addSubview:smallerBtn];
+    _smallerBtn = smallerBtn;
     
     
     _flashBtn = [UIButton buttonWithType:UIButtonTypeRoundedRect];
@@ -145,6 +173,17 @@
         [self.view setNeedsDisplay];
     }];
 }
+
+- (void)sliderValueChanged:(UISlider *)slider {
+    NSLog(@"%f",slider.value);
+    [SLQCameraHelper zoomCarema:slider.value];
+}
+
+- (void)sliderValueEnd:(UISlider *)slider {
+    NSLog(@"%f",slider.value);
+    [SLQCameraHelper cancelZoomRamp];
+}
+
 
 /**
  *  使用照片
