@@ -399,7 +399,8 @@ bail:
 //        }
 //    }
     NSLog(@"取图片");
-    return [[self sharedInstance] image];
+    
+    return [UIImage imageWithCIImage:[[self sharedInstance] image]];
 }
 
 + (void)captureStillImage
