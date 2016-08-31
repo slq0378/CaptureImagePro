@@ -39,13 +39,7 @@ static SLQCameraHelper *sharedInstance = nil;
         NSLog(@"Error: %@", error);
     }
     _device = device;
-   
-    
-    AVCaptureDeviceInput *newVideoInput = [[AVCaptureDeviceInput alloc] initWithDevice:[self backFacingCamera] error:nil];
-    if ([self.capSession canAddInput:newVideoInput]) {
-        [self.capSession addInput:newVideoInput];
-    }
-    self.videoInput = newVideoInput;
+    self.videoInput = captureInput;
     //3.创建、配置输出
     _captureOutput = [[AVCaptureStillImageOutput alloc] init];
     NSDictionary *outputSettings = [[NSDictionary alloc] initWithObjectsAndKeys:AVVideoCodecJPEG,AVVideoCodecKey,nil];
@@ -237,7 +231,7 @@ static SLQCameraHelper *sharedInstance = nil;
             if ([[self capSession] canAddInput:newVideoInput]) {
                 [[self capSession] addInput:newVideoInput];
                 [self setVideoInput:newVideoInput];
-            } else {
+            } else if([[self capSession] canAddInput:[self videoInput]]){
                 [[self capSession] addInput:[self videoInput]];
             }
             [[self capSession] commitConfiguration];
