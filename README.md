@@ -3,6 +3,10 @@
 
 ## 使用很简单
 
+- 可通过Cocoapod安装 
+   - `pod "CaptureImagePro" `
+
+
 - 效果
 
 ![](CaptureImagePro/captureImage.gif)
