@@ -1,6 +1,6 @@
 Pod::Spec.new do |s|
 s.name         = 'CaptureImagePro'
-s.version      = '1.0.1'
+s.version      = '1.0.2'
 s.license      = { :type => 'MIT', :file => 'LICENSE' }
 s.homepage     = 'https://github.com/slq0378'
 s.authors      = {'MrSong' => 'slq0378@163.com'}
